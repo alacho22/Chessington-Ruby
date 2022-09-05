@@ -68,6 +68,23 @@ module Chessington
         raise "The supplied piece is not on the board"
       end
 
+      def square_controlled_by(square)
+        piece = get_piece(square)
+        if piece.nil?
+          nil
+        else
+          piece.player
+        end
+      end
+
+      def get_enemy(player)
+        if player == Player::WHITE
+          Player::BLACK
+        else
+          Player::WHITE
+        end
+      end
+
       def is_square_empty(square)
         get_piece(square).nil?
       end

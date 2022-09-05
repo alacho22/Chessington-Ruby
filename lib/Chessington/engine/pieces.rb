@@ -51,6 +51,16 @@ module Chessington
           end
         end
         # can move diagonally to take pieces
+        one_diagonal_left = Square.at(row_one_forwards, current_column - 1)
+        one_diagonal_right = Square.at(row_one_forwards, current_column + 1)
+        enemy = board.get_enemy(@player)
+
+        if board.in_board(one_diagonal_left) && board.square_controlled_by(one_diagonal_left) == enemy
+          valid_moves << one_diagonal_left
+        end
+        if board.in_board(one_diagonal_right) && board.square_controlled_by(one_diagonal_right) == enemy
+          valid_moves << one_diagonal_right
+        end
 
         valid_moves
       end
