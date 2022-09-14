@@ -18,8 +18,11 @@ module Chessington
       ##
       # Move this piece to the given square on the board.
       def move_to(board, new_square)
-        current_square = board.find_piece(self)
-        board.move_piece(current_square, new_square)
+        board.move_piece(get_current_square(board), new_square)
+      end
+
+      def get_current_square(board)
+        board.find_piece(self)
       end
     end
 
@@ -29,7 +32,14 @@ module Chessington
       include Piece
 
       def available_moves(board)
-        []
+        current_square = get_current_square(board)
+        current_row = current_square.row
+        current_column = current_square.column
+        if @player == Player::WHITE
+          [Square.at(current_row + 1, current_column)]
+        else
+          [Square.at(current_row - 1, current_column)]
+        end
       end
     end
 
