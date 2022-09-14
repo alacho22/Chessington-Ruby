@@ -7,6 +7,7 @@ module Chessington
 
       def initialize(player)
         @player = player
+        @n_moves = 0
       end
 
       ##
@@ -19,6 +20,7 @@ module Chessington
       # Move this piece to the given square on the board.
       def move_to(board, new_square)
         board.move_piece(get_current_square(board), new_square)
+        @n_moves += 1
       end
 
       def get_current_square(board)
@@ -35,11 +37,20 @@ module Chessington
         current_square = get_current_square(board)
         current_row = current_square.row
         current_column = current_square.column
+        valid_moves = []
         if @player == Player::WHITE
-          [Square.at(current_row + 1, current_column)]
+          valid_moves << Square.at(current_row + 1, current_column)
         else
-          [Square.at(current_row - 1, current_column)]
+          valid_moves << Square.at(current_row - 1, current_column)
         end
+        if @n_moves == 0
+          if @player == Player::WHITE
+            valid_moves << Square.at(current_row + 2, current_column)
+          else
+            valid_moves << Square.at(current_row - 2, current_column)
+          end
+        end
+        valid_moves
       end
     end
 
