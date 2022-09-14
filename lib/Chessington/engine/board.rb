@@ -68,6 +68,10 @@ module Chessington
         raise "The supplied piece is not on the board"
       end
 
+      def is_square_empty(square)
+        get_piece(square).nil?
+      end
+
       ##
       #  Moves the piece from the given starting square to the given destination square.
       def move_piece(from_square, to_square)

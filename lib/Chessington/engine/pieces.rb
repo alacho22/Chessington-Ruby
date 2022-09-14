@@ -38,15 +38,27 @@ module Chessington
         current_row = current_square.row
         current_column = current_square.column
         valid_moves = []
-        destination_row_after_move = @player == Player::WHITE ?
-                                       ->(n_spaces) { current_row + n_spaces }
-                                       : ->(n_spaces) { current_row - n_spaces }
-        valid_moves << Square.at(destination_row_after_move.call(1), current_column)
-        if @n_moves == 0
-          valid_moves << Square.at(destination_row_after_move.call(2), current_column)
+
+        one_forwards = Square.at(destination_row_after_move(current_row, 1), current_column)
+        if board.is_square_empty(one_forwards)
+          valid_moves << one_forwards
+          two_forwards = Square.at(destination_row_after_move(current_row, 2), current_column)
+          if board.is_square_empty(two_forwards) && @n_moves == 0
+            valid_moves << two_forwards
+          end
         end
         valid_moves
       end
+
+      def destination_row_after_move(current_row, n_spaces)
+        if @player == Player::WHITE
+          current_row + n_spaces
+        else
+          current_row - n_spaces
+        end
+      end
+
+
     end
 
     ##
