@@ -40,10 +40,10 @@ module Chessington
         valid_moves = []
 
         one_forwards = Square.at(destination_row_after_move(current_row, 1), current_column)
-        if board.is_square_empty(one_forwards)
+        if board.in_board(one_forwards) && board.is_square_empty(one_forwards)
           valid_moves << one_forwards
           two_forwards = Square.at(destination_row_after_move(current_row, 2), current_column)
-          if board.is_square_empty(two_forwards) && @n_moves == 0
+          if board.in_board(two_forwards) && board.is_square_empty(two_forwards) && @n_moves == 0
             valid_moves << two_forwards
           end
         end

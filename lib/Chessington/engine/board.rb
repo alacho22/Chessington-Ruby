@@ -72,6 +72,12 @@ module Chessington
         get_piece(square).nil?
       end
 
+      def in_board(square)
+        row = square.row
+        col = square.column
+        row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE
+      end
+
       ##
       #  Moves the piece from the given starting square to the given destination square.
       def move_piece(from_square, to_square)
