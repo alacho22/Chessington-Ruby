@@ -6,7 +6,6 @@ class TestPieces < Minitest::Test
     include Chessington::Engine
 
     def test_white_pawns_can_move_up_one_square
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -21,7 +20,6 @@ class TestPieces < Minitest::Test
     end
 
     def test_black_pawns_can_move_down_one_square
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -36,7 +34,6 @@ class TestPieces < Minitest::Test
     end
 
     def test_white_pawn_can_move_up_two_squares_if_not_moved
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -51,7 +48,6 @@ class TestPieces < Minitest::Test
     end
 
     def test_black_pawn_can_move_down_two_squares_if_not_moved
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -66,7 +62,6 @@ class TestPieces < Minitest::Test
     end
 
     def test_white_pawn_cannot_move_up_two_squares_if_already_moved
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -81,11 +76,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, Square.at(4, 4))
-
     end
 
     def test_black_pawn_cannot_move_down_two_squares_if_already_moved
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -100,11 +93,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, Square.at(3, 4))
-
     end
 
     def test_white_pawn_cannot_move_if_piece_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -120,11 +111,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       assert_equal(moves.length, 0)
-
     end
 
     def test_black_pawn_cannot_move_if_piece_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -140,11 +129,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       assert_equal(moves.length, 0)
-
     end
 
     def test_white_pawn_cannot_move_two_squares_if_piece_two_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -160,11 +147,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, obstructing_square)
-
     end
 
     def test_black_pawn_cannot_move_two_squares_if_piece_two_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -180,11 +165,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, obstructing_square)
-
     end
 
     def test_white_pawn_cannot_move_two_squares_if_piece_one_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -200,11 +183,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, Square.at(3, 4))
-
     end
 
     def test_black_pawn_cannot_move_two_squares_if_piece_one_in_front
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -220,11 +201,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       refute_includes(moves, Square.at(4, 4))
-
     end
 
     def test_white_pawn_cannot_move_at_top_of_board
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -236,11 +215,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       assert_equal(moves.length, 0)
-
     end
 
     def test_black_pawn_cannot_move_at_bottom_of_board
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -252,11 +229,9 @@ class TestPieces < Minitest::Test
 
       # Assert
       assert_equal(moves.length, 0)
-
     end
 
     def test_white_pawns_can_capture_diagonally
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -277,11 +252,9 @@ class TestPieces < Minitest::Test
       # Assert
       assert_includes(moves, enemy1_square)
       assert_includes(moves, enemy2_square)
-
     end
 
     def test_black_pawns_can_capture_diagonally
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -302,11 +275,9 @@ class TestPieces < Minitest::Test
       # Assert
       assert_includes(moves, enemy1_square)
       assert_includes(moves, enemy2_square)
-
     end
 
     def test_white_pawns_cannot_move_diagonally_except_to_capture
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::WHITE)
@@ -323,11 +294,9 @@ class TestPieces < Minitest::Test
       # Assert
       refute_includes(moves, Square.at(4, 3))
       refute_includes(moves, Square.at(4, 5))
-
     end
 
     def test_black_pawns_cannot_move_diagonally_except_to_capture
-
       # Arrange
       board = Board.empty
       pawn = Pawn.new(Player::BLACK)
@@ -345,5 +314,229 @@ class TestPieces < Minitest::Test
       refute_includes(moves, Square.at(2, 3))
       refute_includes(moves, Square.at(2, 5))
     end
+
+    def test_white_pawns_take_pawn_left
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(4, 2)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      board.move_piece(pawn_square, enemy_square)
+
+      # Assert
+      assert_nil(board.get_piece(pawn_square))
+      assert_equal(pawn, board.get_piece(enemy_square))
+    end
+
+    def test_black_pawns_take_pawn_left
+      # Arrange
+      board = Board.empty
+      board.current_player = Player::BLACK
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(3, 4)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      board.move_piece(pawn_square, enemy_square)
+
+      # Assert
+      assert_nil(board.get_piece(pawn_square))
+      assert_equal(pawn, board.get_piece(enemy_square))
+    end
+
+    def test_white_pawns_take_pawn_right
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(4, 4)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      board.move_piece(pawn_square, enemy_square)
+
+      # Assert
+      assert_nil(board.get_piece(pawn_square))
+      assert_equal(pawn, board.get_piece(enemy_square))
+    end
+
+    def test_black_pawns_take_pawn_right
+      # Arrange
+      board = Board.empty
+      board.current_player = Player::BLACK
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(3, 2)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      board.move_piece(pawn_square, enemy_square)
+
+      # Assert
+      assert_nil(board.get_piece(pawn_square))
+      assert_equal(pawn, board.get_piece(enemy_square))
+    end
+
+    def test_white_pawns_cannot_take_own_piece_left
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      friendly_left = Pawn.new(Player::WHITE)
+      friendly_left_square = Square.at(4, 2)
+      board.set_piece(friendly_left_square, friendly_left)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_left_square)
+    end
+
+
+    def test_white_pawns_cannot_take_own_piece_right
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      friendly_right = Pawn.new(Player::WHITE)
+      friendly_right_square = Square.at(4, 4)
+      board.set_piece(friendly_right_square, friendly_right)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_right_square)
+    end
+
+    def test_black_pawns_cannot_take_own_piece_left
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      friendly_left = Pawn.new(Player::BLACK)
+      friendly_left_square = Square.at(3, 4)
+      board.set_piece(friendly_left_square, friendly_left)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_left_square)
+    end
+
+    def test_black_pawns_cannot_take_own_piece_right
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      friendly_right = Pawn.new(Player::BLACK)
+      friendly_right_square = Square.at(3, 2)
+      board.set_piece(friendly_right_square, friendly_right)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_right_square)
+    end
+
+    def test_white_pawns_cannot_take_king_left
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      king_left = King.new(Player::BLACK)
+      king_left_square = Square.at(4, 2)
+      board.set_piece(king_left_square, king_left)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, king_left_square)
+    end
+
+    def test_white_pawns_cannot_take_king_right
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::WHITE)
+      pawn_square = Square.at(3, 3)
+      board.set_piece(pawn_square, pawn)
+
+      king_right = King.new(Player::BLACK)
+      king_right_square = Square.at(4, 4)
+      board.set_piece(king_right_square, king_right)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, king_right_square)
+    end
+
+    def test_black_pawns_cannot_take_king_left
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      king_left = King.new(Player::WHITE)
+      king_left_square = Square.at(3, 4)
+      board.set_piece(king_left_square, king_left)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, king_left_square)
+    end
+
+    def test_black_pawns_cannot_take_king_right
+      # Arrange
+      board = Board.empty
+      pawn = Pawn.new(Player::BLACK)
+      pawn_square = Square.at(4, 3)
+      board.set_piece(pawn_square, pawn)
+
+      king_right = King.new(Player::WHITE)
+      king_right_square = Square.at(3, 2)
+      board.set_piece(king_right_square, king_right)
+
+      # Act
+      moves = pawn.available_moves(board)
+
+      # Assert
+      refute_includes(moves, king_right_square)
+    end
+
   end
 end
