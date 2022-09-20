@@ -137,6 +137,10 @@ module Chessington
             valid_moves << target_square
             n_spaces_moved += 1
 
+            if !occupying_piece.nil? && occupying_piece.player == opponent
+              break
+            end
+
           end
         }
         valid_moves

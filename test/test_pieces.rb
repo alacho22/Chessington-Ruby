@@ -967,6 +967,157 @@ class TestPieces < Minitest::Test
     end
 
 
+    def test_white_rook_cannot_move_up_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 2))
+    end
+
+    def test_black_rook_cannot_move_up_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 2))
+    end
+
+    def test_white_rook_cannot_move_down_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 0))
+    end
+
+    def test_black_rook_cannot_move_down_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(6, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 0))
+    end
+
+    def test_white_rook_cannot_move_left_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 5))
+    end
+
+    def test_black_rook_cannot_move_left_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 5))
+    end
+
+    def test_white_rook_cannot_move_right_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 2))
+    end
+
+    def test_black_rook_cannot_move_right_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(0, 2))
+    end
 
   end
 end
