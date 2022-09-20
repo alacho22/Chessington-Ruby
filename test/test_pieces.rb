@@ -538,5 +538,231 @@ class TestPieces < Minitest::Test
       refute_includes(moves, king_right_square)
     end
 
+    def test_white_rooks_can_move_up_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(1, 0))
+    end
+
+    def test_black_rooks_can_move_up_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(1, 0))
+    end
+
+    def test_white_rooks_can_move_down_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(1, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_black_rooks_can_move_down_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(1, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_white_rooks_can_move_left_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 1)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_black_rooks_can_move_left_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 1)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_white_rooks_can_move_right_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 1))
+    end
+
+    def test_black_rooks_can_move_right_one
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 1))
+    end
+
+    def test_white_rooks_can_move_up_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(7, 0))
+    end
+
+    def test_black_rooks_can_move_up_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(7, 0))
+    end
+
+    def test_white_rooks_can_move_down_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_black_rooks_can_move_down_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_white_rooks_can_move_left_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_black_rooks_can_move_left_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_white_rooks_can_move_right_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 7))
+    end
+
+    def test_black_rooks_can_move_right_many
+      # Arrange
+      board = Board.empty
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 7))
+    end
+
+
+
   end
 end

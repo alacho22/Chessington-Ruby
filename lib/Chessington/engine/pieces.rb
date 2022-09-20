@@ -81,8 +81,6 @@ module Chessington
           current_row - n_spaces
         end
       end
-
-
     end
 
     ##
@@ -110,8 +108,32 @@ module Chessington
     class Rook
       include Piece
 
+      UNIT_MOVE_DIRECTIONS = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+
       def available_moves(board)
-        []
+        current_square = get_current_square(board)
+        current_row = current_square.row
+        current_column = current_square.column
+
+        valid_moves = []
+
+        UNIT_MOVE_DIRECTIONS.each { |row_direction, col_direction|
+          n_spaces_moved = 1
+
+          row = current_row + (row_direction * n_spaces_moved)
+          col = current_column + (col_direction * n_spaces_moved)
+          target_square = Square.at(row, col)
+          while board.in_board(target_square)
+
+            valid_moves << target_square
+            n_spaces_moved += 1
+
+            row = current_row + (row_direction * n_spaces_moved)
+            col = current_column + (col_direction * n_spaces_moved)
+            target_square = Square.at(row, col)
+          end
+        }
+        valid_moves
       end
     end
 
