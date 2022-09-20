@@ -55,15 +55,15 @@ module Chessington
 
         one_diagonal_right = Square.at(row_one_forwards, current_column + 1)
 
-        enemy = board.get_enemy(@player)
+        opponent = @player.opponent
 
-        if board.in_board(one_diagonal_left) && board.square_controlled_by(one_diagonal_left) == enemy
+        if board.in_board(one_diagonal_left) && board.square_controlled_by(one_diagonal_left) == opponent
           one_diagonal_left_piece = board.get_piece(one_diagonal_left)
           unless one_diagonal_left_piece.is_a?(King)
             valid_moves << one_diagonal_left
           end
         end
-        if board.in_board(one_diagonal_right) && board.square_controlled_by(one_diagonal_right) == enemy
+        if board.in_board(one_diagonal_right) && board.square_controlled_by(one_diagonal_right) == opponent
           one_diagonal_right_piece = board.get_piece(one_diagonal_right)
           unless one_diagonal_right_piece.is_a?(King)
             valid_moves << one_diagonal_right
@@ -114,7 +114,7 @@ module Chessington
         current_square = get_current_square(board)
         current_row = current_square.row
         current_column = current_square.column
-        enemy = board.get_enemy(@player)
+        opponent = @player.opponent
 
         valid_moves = []
 
@@ -130,7 +130,7 @@ module Chessington
             end
 
             occupying_piece = board.get_piece(target_square)
-            if !occupying_piece.nil? && occupying_piece.player != enemy
+            if !occupying_piece.nil? && occupying_piece.player != opponent
               break
             end
 

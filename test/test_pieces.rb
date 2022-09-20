@@ -966,5 +966,7 @@ class TestPieces < Minitest::Test
       refute_includes(moves, friendly_square)
     end
 
+
+
   end
 end

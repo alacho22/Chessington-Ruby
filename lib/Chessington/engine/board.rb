@@ -77,14 +77,6 @@ module Chessington
         end
       end
 
-      def get_enemy(player)
-        if player == Player::WHITE
-          Player::BLACK
-        else
-          Player::WHITE
-        end
-      end
-
       def is_square_empty(square)
         get_piece(square).nil?
       end
