@@ -538,6 +538,16 @@ class TestPieces < Minitest::Test
       refute_includes(moves, king_right_square)
     end
 
+
+
+  end
+
+
+
+
+  class TestRook < Minitest::Test
+
+    include Chessington::Engine
     def test_white_rooks_can_move_up_one
       # Arrange
       board = Board.empty
@@ -1270,6 +1280,5 @@ class TestPieces < Minitest::Test
       # Assert
       assert_includes(moves, enemy_square)
     end
-
   end
 end
