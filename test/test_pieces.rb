@@ -1119,5 +1119,157 @@ class TestPieces < Minitest::Test
       refute_includes(moves, Square.at(0, 2))
     end
 
+    def test_white_rook_can_take_black_piece_up
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(1, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_rook_can_take_white_piece_up
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(1, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_rook_can_take_black_piece_down
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_rook_can_take_white_piece_down
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(6, 0)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_rook_can_take_black_piece_left
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_rook_can_take_white_piece_left
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(0, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_rook_can_take_black_piece_right
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_rook_can_take_white_piece_right
+      # Arrange
+      board = Board.empty
+
+      rook = Rook.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, rook)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(0, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = rook.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
   end
 end
