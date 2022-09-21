@@ -411,7 +411,6 @@ class TestPieces < Minitest::Test
       refute_includes(moves, friendly_left_square)
     end
 
-
     def test_white_pawns_cannot_take_own_piece_right
       # Arrange
       board = Board.empty
@@ -537,16 +536,748 @@ class TestPieces < Minitest::Test
       # Assert
       refute_includes(moves, king_right_square)
     end
-
-
-
   end
 
+  class TestBishop < Minitest::Test
+    include Chessington::Engine
+    def test_white_bishops_can_move_NE_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
 
+      # Act
+      moves = bishop.available_moves(board)
 
+      # Assert
+      assert_includes(moves, Square.at(1, 1))
+    end
+
+    def test_black_bishops_can_move_NE_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(1, 1))
+    end
+
+    def test_white_bishops_can_move_SE_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(1, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 1))
+    end
+
+    def test_black_bishops_can_move_SE_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(1, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 1))
+    end
+
+    def test_white_bishops_can_move_SW_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(1, 1)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_black_bishops_can_move_SW_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(1, 1)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(0, 0))
+    end
+
+    def test_white_bishops_can_move_NW_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 1)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(1, 0))
+    end
+
+    def test_black_bishops_can_move_NW_one
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 1)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, Square.at(1, 0))
+    end
+
+    def test_white_bishops_can_move_NE_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (1..7).each do |i|
+        assert_includes(moves, Square.at(i, i))
+      end
+    end
+
+    def test_black_bishops_can_move_NE_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (1..7).each do |i|
+        assert_includes(moves, Square.at(i, i))
+      end
+    end
+
+    def test_white_bishops_can_move_SE_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (0..6).each do |i|
+        assert_includes(moves, Square.at(i, 7 - i))
+      end
+    end
+
+    def test_black_bishops_can_move_SE_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (0..6).each do |i|
+        assert_includes(moves, Square.at(i, 7 - i))
+      end
+    end
+
+    def test_white_bishops_can_move_SW_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (0..6).each do |i|
+        assert_includes(moves, Square.at(i, i))
+      end
+    end
+
+    def test_black_bishops_can_move_SW_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (0..6).each do |i|
+        assert_includes(moves, Square.at(i, i))
+      end
+    end
+
+    def test_white_bishops_can_move_NW_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (1..7).each do |i|
+        assert_includes(moves, Square.at(i, 7 - i))
+      end
+    end
+
+    def test_black_bishops_can_move_NW_many
+      # Arrange
+      board = Board.empty
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      (1..7).each do |i|
+        assert_includes(moves, Square.at(i, 7 - i))
+      end
+    end
+
+    def test_white_bishops_can_only_move_diagonally
+      # Arrange
+      board = Board.empty
+      row = 3
+      col = 3
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(row, col)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      moves.each do |move|
+        row_diff = move.row - row
+        col_diff = move.column - col
+        assert row_diff == col_diff || row_diff == -col_diff, "Move not diagonal of bishop"
+      end
+    end
+
+    def test_black_bishops_can_only_move_horizontally_or_vertically
+      # Arrange
+      board = Board.empty
+      row = 3
+      col = 3
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(row, col)
+      board.set_piece(square, bishop)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      moves.each do |move|
+        row_diff = move.row - row
+        col_diff = move.column - col
+        assert row_diff == col_diff || row_diff == -col_diff, "Move not diagonal of bishop"
+      end
+    end
+
+    def test_white_bishop_cannot_move_NE_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::WHITE)
+      friendly_square = Square.at(1, 1)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_black_bishop_cannot_move_NE_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::BLACK)
+      friendly_square = Square.at(1, 1)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_white_bishop_cannot_move_SE_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(1, 0)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::WHITE)
+      friendly_square = Square.at(0, 1)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_black_bishop_cannot_move_SE_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(1, 0)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::BLACK)
+      friendly_square = Square.at(0, 1)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_white_bishop_cannot_move_SW_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::WHITE)
+      friendly_square = Square.at(6, 6)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_black_bishop_cannot_move_SW_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::BLACK)
+      friendly_square = Square.at(6, 6)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_white_bishop_cannot_move_NW_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::WHITE)
+      friendly_square = Square.at(1, 6)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_black_bishop_cannot_move_NW_onto_friendly_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      friendly = Pawn.new(Player::BLACK)
+      friendly_square = Square.at(1, 6)
+      board.set_piece(friendly_square, friendly)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, friendly_square)
+    end
+
+    def test_white_bishop_cannot_move_NE_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(1, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(2, 2))
+    end
+
+    def test_black_bishop_cannot_move_NE_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(1, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(2, 2))
+    end
+
+    def test_white_bishop_cannot_move_SE_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 2))
+    end
+
+    def test_black_bishop_cannot_move_SE_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(6, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 2))
+    end
+
+    def test_white_bishop_cannot_move_SW_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 5))
+    end
+
+    def test_black_bishop_cannot_move_SW_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(5, 5))
+    end
+
+    def test_white_bishop_cannot_move_NW_through_black_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(1, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(2, 5))
+    end
+
+    def test_black_bishop_cannot_move_NW_through_white_piece
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(1, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      refute_includes(moves, Square.at(2, 5))
+    end
+
+    def test_white_bishop_can_take_black_piece_NE
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(1, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_bishop_can_take_white_piece_NE
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(1, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_bishop_can_take_black_piece_SE
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_bishop_can_take_white_piece_SE
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 0)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(6, 1)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_bishop_can_take_black_piece_SW
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(6, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_bishop_can_take_white_piece_SW
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(7, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(6, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_white_bishop_can_take_black_piece_NW
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::WHITE)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::BLACK)
+      enemy_square = Square.at(1, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+
+    def test_black_bishop_can_take_white_piece_NW
+      # Arrange
+      board = Board.empty
+
+      bishop = Bishop.new(Player::BLACK)
+      square = Square.at(0, 7)
+      board.set_piece(square, bishop)
+
+      enemy = Pawn.new(Player::WHITE)
+      enemy_square = Square.at(1, 6)
+      board.set_piece(enemy_square, enemy)
+
+      # Act
+      moves = bishop.available_moves(board)
+
+      # Assert
+      assert_includes(moves, enemy_square)
+    end
+  end
 
   class TestRook < Minitest::Test
-
     include Chessington::Engine
     def test_white_rooks_can_move_up_one
       # Arrange
@@ -802,7 +1533,7 @@ class TestPieces < Minitest::Test
 
       # Assert
       moves.each do |move|
-        assert move.row == row || move.column == col, "Move not in row or column of rook"
+        assert move.row == row || move.column == col, "Move not in row or column of bishop"
       end
     end
 
@@ -820,7 +1551,7 @@ class TestPieces < Minitest::Test
 
       # Assert
       moves.each do |move|
-        assert move.row == row || move.column == col, "Move not in row or column of rook"
+        assert move.row == row || move.column == col, "Move not in row or column of bishop"
       end
     end
 
@@ -975,7 +1706,6 @@ class TestPieces < Minitest::Test
       # Assert
       refute_includes(moves, friendly_square)
     end
-
 
     def test_white_rook_cannot_move_up_through_black_piece
       # Arrange

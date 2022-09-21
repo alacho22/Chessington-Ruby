@@ -98,8 +98,42 @@ module Chessington
     class Bishop
       include Piece
 
+      UNIT_MOVE_DIRECTIONS = [[1, 1], [-1, 1], [1, -1], [-1, -1]]
+
       def available_moves(board)
-        []
+        current_square = get_current_square(board)
+        current_row = current_square.row
+        current_column = current_square.column
+        opponent = @player.opponent
+
+        valid_moves = []
+
+        UNIT_MOVE_DIRECTIONS.each { |row_direction, col_direction|
+          n_spaces_moved = 1
+          loop do
+            row = current_row + (row_direction * n_spaces_moved)
+            col = current_column + (col_direction * n_spaces_moved)
+            target_square = Square.at(row, col)
+
+            unless board.in_board(target_square)
+              break
+            end
+
+            occupying_piece = board.get_piece(target_square)
+            if !occupying_piece.nil? && occupying_piece.player != opponent
+              break
+            end
+
+            valid_moves << target_square
+            n_spaces_moved += 1
+
+            if !occupying_piece.nil? && occupying_piece.player == opponent
+              break
+            end
+
+          end
+        }
+        valid_moves
       end
     end
 
