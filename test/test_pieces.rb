@@ -2011,4 +2011,9 @@ class TestPieces < Minitest::Test
       assert_includes(moves, enemy_square)
     end
   end
+
+  class TestQueen < Minitest::Test
+
+  end
+
 end

@@ -68,7 +68,7 @@ module Chessington
         raise "The supplied piece is not on the board"
       end
 
-      def square_controlled_by(square)
+      def player_square_is_controlled_by(square)
         piece = get_piece(square)
         if piece.nil?
           nil
@@ -81,7 +81,7 @@ module Chessington
         get_piece(square).nil?
       end
 
-      def in_board(square)
+      def is_in_board(square)
         row = square.row
         col = square.column
         row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE

@@ -42,11 +42,11 @@ module Chessington
         row_one_forwards = destination_row_after_move(current_row, 1)
         one_forwards = Square.at(row_one_forwards, current_column)
         # can move forwards unless the space is occupied
-        if board.in_board(one_forwards) && board.is_square_empty(one_forwards)
+        if board.is_in_board(one_forwards) && board.is_square_empty(one_forwards)
           valid_moves << one_forwards
           # can move two forwards if haven't moved yet
           two_forwards = Square.at(destination_row_after_move(current_row, 2), current_column)
-          if board.in_board(two_forwards) && board.is_square_empty(two_forwards) && @n_moves == 0
+          if board.is_in_board(two_forwards) && board.is_square_empty(two_forwards) && @n_moves == 0
             valid_moves << two_forwards
           end
         end
@@ -57,13 +57,13 @@ module Chessington
 
         opponent = @player.opponent
 
-        if board.in_board(one_diagonal_left) && board.square_controlled_by(one_diagonal_left) == opponent
+        if board.is_in_board(one_diagonal_left) && board.player_square_is_controlled_by(one_diagonal_left) == opponent
           one_diagonal_left_piece = board.get_piece(one_diagonal_left)
           unless one_diagonal_left_piece.is_a?(King)
             valid_moves << one_diagonal_left
           end
         end
-        if board.in_board(one_diagonal_right) && board.square_controlled_by(one_diagonal_right) == opponent
+        if board.is_in_board(one_diagonal_right) && board.player_square_is_controlled_by(one_diagonal_right) == opponent
           one_diagonal_right_piece = board.get_piece(one_diagonal_right)
           unless one_diagonal_right_piece.is_a?(King)
             valid_moves << one_diagonal_right
@@ -115,12 +115,12 @@ module Chessington
             col = current_column + (col_direction * n_spaces_moved)
             target_square = Square.at(row, col)
 
-            unless board.in_board(target_square)
+            unless board.is_in_board(target_square)
               break
             end
 
             occupying_piece = board.get_piece(target_square)
-            if !occupying_piece.nil? && occupying_piece.player != opponent
+            if !occupying_piece.nil? && occupying_piece.player == @player
               break
             end
 
